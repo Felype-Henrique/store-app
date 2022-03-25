@@ -37,7 +37,7 @@ const Home = ({navigation}) => {
     const ProductCard = ({data}) => {
         return(
             <TouchableOpacity 
-            onPress={() => navigation.navigate("ProductInfo"),{productId:data.id}}
+            onPress={() => navigation.navigate("ProductInfo" , {productId: data.id})}
             style={{
                 width: '48%',
                 marginVertical: 14,
