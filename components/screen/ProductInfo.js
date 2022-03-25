@@ -9,10 +9,12 @@ import {
   Image,
   Dimensions,
   Animated,
+  ToastAndroid,
 } from "react-native";
 import { COLOURS, Items } from "../database/Database";
 import Entypo from "react-native-vector-icons/Entypo";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ProductInfo = ({ route, navigation }) => {
   const { productId } = route.params;
@@ -38,6 +40,39 @@ const ProductInfo = ({ route, navigation }) => {
       if (Items[index].id == productId) {
         await setProduct(Items[index]);
         return;
+      }
+    }
+  };
+
+  const addToCart = async (id) => {
+    let itemArray = await AsyncStorage.getItem("cartItems");
+    itemArray = JSON.parse(itemArray);
+    if (itemArray) {
+      let array = itemArray;
+      array.push(id);
+
+      try {
+        await AsyncStorage.setItem("cartItems", JSON.stringify(array));
+        ToastAndroid.show(
+          "Adicionado com sucesso ao carrinho",
+          ToastAndroid.LONG
+        );
+        navigation.navigate("Home");
+      } catch (error) {
+        return error;
+      }
+    } else {
+      let array = [];
+      array.push(id);
+      try {
+        await AsyncStorage.setItem("cartItems", JSON.stringify(array));
+        ToastAndroid.show(
+          "Adicionado com sucesso ao carrinho",
+          ToastAndroid.SHORT
+        );
+        navigation.navigate("Home");
+      } catch (error) {
+        return error;
       }
     }
   };
@@ -306,6 +341,7 @@ const ProductInfo = ({ route, navigation }) => {
         }}
       >
         <TouchableOpacity
+          onPress={() => (product.isAvailable ? addToCart(product.id) : null)}
           style={{
             width: "80%",
             height: "90%",
@@ -322,10 +358,9 @@ const ProductInfo = ({ route, navigation }) => {
               letterSpacing: 1,
               color: COLOURS.white,
               textTransform: "uppercase",
-              
             }}
           >
-            {product.isAvailable ? "Comprar" : "Indisponível"}
+            {product.isAvailable ? "Adicionar ao carrinho" : "Indisponível"}
           </Text>
         </TouchableOpacity>
       </View>
