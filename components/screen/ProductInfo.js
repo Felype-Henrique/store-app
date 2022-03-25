@@ -47,7 +47,7 @@ const ProductInfo = ({ route, navigation }) => {
       <View
         style={{
           width: width,
-          height: 240,
+          height: 150,
           alignItems: "center",
           justifyContent: "center",
         }}
@@ -289,9 +289,8 @@ const ProductInfo = ({ route, navigation }) => {
                 marginBottom: 4,
               }}
             >
-              &#8377; {product.productPrice}.00
+              R$ {product.productPrice}.00
             </Text>
-            <Text>{}</Text>
           </View>
         </View>
       </ScrollView>
@@ -313,7 +312,7 @@ const ProductInfo = ({ route, navigation }) => {
             backgroundColor: COLOURS.blue,
             borderRadius: 20,
             justifyContent: "center",
-            alignContent: "center",
+            alignItems: "center",
           }}
         >
           <Text
@@ -323,6 +322,7 @@ const ProductInfo = ({ route, navigation }) => {
               letterSpacing: 1,
               color: COLOURS.white,
               textTransform: "uppercase",
+              
             }}
           >
             {product.isAvailable ? "Comprar" : "Indisponível"}
