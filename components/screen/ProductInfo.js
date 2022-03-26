@@ -130,7 +130,7 @@ const ProductInfo = ({ route, navigation }) => {
               paddingLeft: 16,
             }}
           >
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.goBack('Home')}>
               <Entypo
                 name="chevron-left"
                 style={{
