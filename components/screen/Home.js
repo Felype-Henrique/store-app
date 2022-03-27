@@ -199,7 +199,7 @@ const Home = ({ navigation }) => {
               name="cart"
               style={{
                 fontSize: 18,
-                color: COLOURS.backgroundLight,
+                color: COLOURS.backgroundDark,
                 padding: 12,
                 borderRadius: 10,
                 borderWidth: 1,
